@@ -13,6 +13,6 @@ export default {
 
 <style>
 .detail{
-  margin-top: 70px;
+  margin: 70px 0;
 }
 </style>

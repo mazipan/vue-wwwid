@@ -43,7 +43,7 @@ export default {
 
 <style>
 .home{
-  margin-top: 70px;
+  margin: 70px 0;
 }
 ul{
   margin: 0;

@@ -25,7 +25,7 @@ export default {
 
 <style scoped>
 .about{
-  margin-top: 70px;
+  margin: 70px 0;
   text-align: center;
 }
 </style>

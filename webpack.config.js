@@ -6,7 +6,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const workboxPlugin = require('workbox-webpack-plugin');
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const DIST = path.resolve(__dirname, "build");
 const SRC = path.resolve(__dirname, "src");
@@ -23,8 +26,8 @@ module.exports = {
   output: {
 		path: DIST,
 		publicPath: '/vue-wwwid/',
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js'
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -33,7 +36,18 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
-            'css': 'vue-style-loader!css-loader'
+            css: ExtractTextPlugin.extract({
+              use: 'css-loader',
+              fallback: 'vue-style-loader'
+            }),
+            scss: ExtractTextPlugin.extract({
+              use: 'css-loader!sass-loader',
+              fallback: 'vue-style-loader'
+            }),
+            sass: ExtractTextPlugin.extract({
+              use: 'css-loader!sass-loader?indentedSyntax',
+              fallback: 'vue-style-loader'
+            })
           }
         }
       },
@@ -42,30 +56,6 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
-			{
-				test: /\.(scss|sass|css)$/,
-				exclude: [
-					COMPONENTS, PAGES
-				],
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: [
-						{
-							loader: 'css-loader',
-							options: { sourceMap: CSS_MAPS, importLoaders: 1, minimize: true }
-						},
-						// {
-						// 	loader: `postcss-loader`,
-						// 	options: {
-						// 		sourceMap: CSS_MAPS,
-						// 		plugins: () => {
-						// 			autoprefixer({ browsers: ['last 2 versions'] });
-						// 		}
-						// 	}
-						// },
-					]
-				})
-			},
 			{
 				test: /\.json$/,
 				use: 'json-loader'
@@ -90,15 +80,33 @@ module.exports = {
       assets: ASSETS
     }
   },
+  performance: {
+    hints: false
+  },
+
+	devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
+
+  node: {
+    // prevent webpack from injecting useless setImmediate polyfill because Vue
+    // source contains it (although only uses it if it's native).
+    setImmediate: false,
+    // prevent webpack from injecting mocks to Node native modules
+    // that does not make sense for the client
+    dgram: 'empty',
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+    child_process: 'empty'
+  },
   plugins: ([
 		new webpack.NoEmitOnErrorsPlugin(),
-		new ExtractTextPlugin({
-			filename: 'style.css',
-			allChunks: true,
-			disable: ENV !== 'production'
-		}),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(ENV)
+		}),
+		new ExtractTextPlugin({
+			filename: '[name].[contenthash].css',
+			allChunks: true,
+			disable: ENV !== 'production'
 		}),
 		new HtmlWebpackPlugin({
 			template: './index.ejs',
@@ -126,14 +134,12 @@ module.exports = {
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: function (module) {
+      minChunks: function (module, count) {
         // any required modules inside node_modules are extracted to vendor
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
+          module.resource.indexOf('node_modules') >= 0
         )
       }
     }),
@@ -141,18 +147,7 @@ module.exports = {
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
-      chunks: ['vendor']
-    }),
-    new workboxPlugin({
-      globDirectory: DIST,
-      globPatterns: ['**/*.{html,js,css,json,gif,png}'],
-      swDest: path.join(DIST, 'sw.js'),
-      swSrc: path.join(SRC, 'sw.js')
-    }),
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: {
-        safe: true
-      }
+      // chunks: ['vendor']
     }),
 		new webpack.optimize.UglifyJsPlugin({
 			output: {
@@ -181,8 +176,32 @@ module.exports = {
 				join_vars: true,
 				cascade: true,
 				drop_console: true
-			}
-    })
+      },
+      parallel: true
+    }),
+    new workboxPlugin({
+      globDirectory: DIST,
+      globPatterns: ['**/*.{html,js,css,json,gif,png}'],
+      swDest: path.join(DIST, 'sw.js'),
+      swSrc: path.join(SRC, 'sw.js')
+    }),
+    new OptimizeCSSPlugin({
+      cssProcessorOptions: {
+        safe: true
+      }
+    }),
+    new CompressionWebpackPlugin({
+      asset: '[path].gz[query]',
+      test: new RegExp(
+        '\\.(js|css|html)$'
+      ),
+      algorithm: 'gzip',
+      threshold: 10240,
+      minRatio: 0.8,
+      cache: true
+    }),
+    // UNCOMMENT FOR BUNDLE ANALYZE
+    // new BundleAnalyzerPlugin()
   ] : []),
 
   devServer: {
@@ -202,25 +221,6 @@ module.exports = {
 				}
 			}
 		}
-  },
-
-  performance: {
-    hints: false
-  },
-
-	devtool: ENV === 'production' ? 'source-map' : 'cheap-module-eval-source-map',
-
-  node: {
-    // prevent webpack from injecting useless setImmediate polyfill because Vue
-    // source contains it (although only uses it if it's native).
-    setImmediate: false,
-    // prevent webpack from injecting mocks to Node native modules
-    // that does not make sense for the client
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty'
   }
 }
 

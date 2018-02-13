@@ -13,7 +13,7 @@ https://medium.com/wwwid/tantangan-web-developer-untuk-membuat-aplikasi-web-bisa
 
 https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2Fwwwid
 
-## Lighthouse
+## Lighthouse (latest test: 2018-02-13)
 
 JSON result [here](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/lighthouse-result/2018-02-13/mazipan.github.io-20180213T182742.json)
 

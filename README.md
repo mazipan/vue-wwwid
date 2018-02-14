@@ -19,7 +19,7 @@ JSON result [here](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/li
 
 ![summary](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/lighthouse-result/2018-02-15/summary.png)
 
-![metric](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/lighthouse-result/2018-02-15/metric.png)
+![perf](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/lighthouse-result/2018-02-15/perf.png)
 
 
 Copyright © 2018 Built with ❤️ for 🇮🇩 by Irfan Maulana

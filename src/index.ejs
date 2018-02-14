@@ -33,9 +33,9 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
 
-  <meta name="msapplication-TileColor" content="#0096d9">
+  <meta name="msapplication-TileColor" content="#4DBA87">
   <meta name="msapplication-TileImage" content="assets/ms-icon-144x144.png">
-  <meta name="theme-color" content="#0096d9">
+  <meta name="theme-color" content="#4DBA87">
 
   <link rel="apple-touch-startup-image" href="assets/icons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/apple-touch-icon-152x152.png">
@@ -49,9 +49,60 @@
   <meta name="HandheldFriendly" content="true">
 
   <link rel="manifest" href="manifest.json">
+
+  <!-- INLINE STYLE FOR CRITICAL CSS -->
+  <style>
+    body{
+      font-family: -apple-system,BlinkMacSystemFont,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+      color: #282828;
+      font-size: 100%;
+    }
+    a{
+      color: #4DBA87;
+    }
+    a:hover{
+      color: #4DBA87;
+    }
+    .header, .footer{
+      width: 100%;
+      background-color: #4DBA87;
+      color: #fff;
+      height: 60px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: fixed;
+      left: 0;
+    }
+    h1{
+      margin: 0;
+      margin-left: .3em;
+      font-size: 1.5em;
+    }
+    .header{
+      height: 60px;
+      top: 0;
+    }
+    .footer{
+      height: 50px;
+      font-size: .5em;
+      bottom: 0;
+    }
+  </style>
+
 </head>
 <body>
   <noscript><p>This page is powered by Vue, but your Javascript was disable.<br>Please use the latest browser and enable javascript.</p></noscript>
+
+  <header class="header">
+    <h1>Vue-WWWID</h1>
+  </header>
+
   <div id="app"></div>
+
+  <footer class="footer">
+    Copyright © 2018 by Irfan Maulana
+  </footer>
+
 </body>
 </html>

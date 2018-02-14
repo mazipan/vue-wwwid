@@ -14,6 +14,10 @@
 
 <script>
 const API_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2Fwwwid'
+const CACHE_KEY = 'articles'
+
+import {getCache, saveCache} from '@/cache'
+
 export default {
   name: 'Home',
   data() {
@@ -26,16 +30,22 @@ export default {
   },
   methods: {
     fetchArtciles() {
-      const REGEX = /<p>.*.<\/p>\n</g
-      fetch(API_URL)
+      let data = getCache(CACHE_KEY)
+      if (data) {
+        this.articles = data
+      } else {
+        fetch(API_URL)
         .then(resp => resp.json())
         .then(data => {
+          const REGEX = /<p>.*.<\/p>\n</g
           this.articles = data.items.map(item => {
             let a = item.content.match(REGEX)
             item.contentView = a[0].slice(0, -1)
             return item
           })
+          saveCache(CACHE_KEY, this.articles)
         })
+      }
     }
   }
 }

@@ -7,6 +7,10 @@ const autoprefixer = require('autoprefixer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const InlineChunkWebpackPlugin = require('html-webpack-inline-chunk-plugin');
+
 const workboxPlugin = require('workbox-webpack-plugin');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -17,12 +21,14 @@ const ASSETS = path.resolve(__dirname, "src/assets");
 const PAGES = path.resolve(__dirname, "src/pages");
 const COMPONENTS = path.resolve(__dirname, "src/components");
 
-const ENV = process.env.NODE_ENV || 'development';
+const ENV = process.env.NODE_ENV || 'production';
 const CSS_MAPS = ENV !== 'production';
 
 module.exports = {
 	context: SRC,
-  entry: './main.js',
+  entry: {
+    main: './main.js'
+  },
   output: {
 		path: DIST,
 		publicPath: '/vue-wwwid/',
@@ -31,6 +37,12 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        loader: 'image-webpack-loader',
+        // This will apply the loader before the other ones
+        enforce: 'pre',
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -63,17 +75,36 @@ module.exports = {
 			{
 				test: /\.(xml|html|txt|md)$/,
 				use: 'raw-loader'
-			},
+      },
+      {
+        test: /\.(jpe?g|png|gif)$/,
+        loader: 'url-loader',
+        options: {
+          // Inline files smaller than 10 kB (10240 bytes)
+          limit: 10 * 1024,
+        }
+      },
 			{
-				test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
+				test: /\.(svg|woff2?|ttf|eot)(\?.*)?$/i,
 				use: ENV === 'production' ? 'file-loader' : 'url-loader'
-			}
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+        options: {
+          // Inline files smaller than 10 kB (10240 bytes)
+          limit: 10 * 1024,
+          // Remove the quotes from the url
+          // (they’re unnecessary in most cases)
+          noquotes: true,
+        },
+      }
     ]
   },
   resolve: {
     extensions: ['.js', '.json', '.vue'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      'vue$': 'vue/dist/vue.runtime.esm.js',
       '@': SRC,
 			pages: PAGES,
       components: COMPONENTS,
@@ -109,7 +140,8 @@ module.exports = {
 			disable: ENV !== 'production'
 		}),
 		new HtmlWebpackPlugin({
-			template: './index.ejs',
+      template: './index.ejs',
+      excludeChunks: ['runtime'],
 			minify: {
         collapseBooleanAttributes: true,
         collapseWhitespace: true,
@@ -126,9 +158,15 @@ module.exports = {
       }
     })
 	]).concat(ENV === 'production' ? [
+    // copy file to dist
     new CopyWebpackPlugin([
-			{ from: './manifest.json', to: './' }
+			{ from: './manifest.json', to: './' },
+			{ from: './assets', to: './assets' },
+			{ from: '../node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js', to: './' },
+			{ from: '../node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js.map', to: './' },
+			{ from: './assets', to: './assets' }
     ]),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // split vendor js into its own file
@@ -144,40 +182,53 @@ module.exports = {
       }
     }),
     // extract webpack runtime and module manifest to its own file in order to
-    // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      // chunks: ['vendor']
+      name: 'runtime',
+
+      // minChunks: Infinity means that no app modules
+      // will be included into this chunk
+      minChunks: Infinity,
     }),
-		new webpack.optimize.UglifyJsPlugin({
-			output: {
-				comments: false
-			},
-			compress: {
-				unsafe_comps: true,
-				properties: true,
-				keep_fargs: false,
-				pure_getters: true,
-				collapse_vars: true,
-				unsafe: true,
-				warnings: false,
-				screw_ie8: true,
-				sequences: true,
-				dead_code: true,
-				drop_debugger: true,
-				comparisons: true,
-				conditionals: true,
-				evaluate: true,
-				booleans: true,
-				loops: true,
-				unused: true,
-				hoist_funs: true,
-				if_return: true,
-				join_vars: true,
-				cascade: true,
-				drop_console: true
+    new InlineChunkWebpackPlugin({
+      inlineChunks: ['runtime']
+    }),
+    new ManifestPlugin({
+      fileName: 'dep-graph.json'
+    }),
+		new UglifyJSPlugin({
+      test: /\.js($|\?)/i,
+			uglifyOptions: {
+        output: {
+          comments: false,
+          beautify: false
+        },
+        warnings: false,
+        extractComments: true,
+        compress: {
+          unsafe_comps: true,
+          properties: true,
+          keep_fargs: false,
+          pure_getters: true,
+          collapse_vars: true,
+          unsafe: true,
+          warnings: false,
+          sequences: true,
+          dead_code: true,
+          drop_debugger: true,
+          comparisons: true,
+          conditionals: true,
+          evaluate: true,
+          booleans: true,
+          loops: true,
+          unused: true,
+          hoist_funs: true,
+          if_return: true,
+          join_vars: true,
+          drop_console: true
+        }
       },
-      parallel: true
+      parallel: true,
+      sourceMap: false
     }),
     new workboxPlugin({
       globDirectory: DIST,

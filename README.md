@@ -22,4 +22,4 @@ JSON result [here](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/li
 ![metric](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/lighthouse-result/2018-02-13/metric.png)
 
 
-Copyright © 2017 Built with ❤️ for 🇮🇩 by Irfan Maulana
+Copyright © 2018 Built with ❤️ for 🇮🇩 by Irfan Maulana

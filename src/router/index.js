@@ -16,7 +16,7 @@ var router = new Router({
       component: Home
     },
     {
-      path: '/detail/:slug',
+      path: '/post/:slug',
       name: 'Detail',
       component: Detail
     },

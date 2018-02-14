@@ -14,7 +14,17 @@ workbox.router.registerRoute(
 workbox.router.registerRoute(
   new RegExp('^https:\/\/api\.rss2json\.com.*'),
   workbox.strategies.cacheFirst({
-    cacheName: 'rss2json',
+    cacheName: 'wwwid-api',
+    cacheableResponse: {
+      statuses: [0, 200], // Make sure 0 is included in this list.
+    }
+  })
+);
+
+workbox.router.registerRoute(
+  new RegExp('^https:\/\/cdn-images.*'),
+  workbox.strategies.cacheFirst({
+    cacheName: 'wwwid-img',
     cacheableResponse: {
       statuses: [0, 200], // Make sure 0 is included in this list.
     }

@@ -11,6 +11,15 @@ if (process.env.NODE_ENV === "production") {
   Vue.config.devtools = true
 }
 
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  observer: true,
+  preLoad: 1,
+  loading: require('./assets/icons/overlay.png'),
+  attempt: 1,
+  listenEvents: ['scroll']
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

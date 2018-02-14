@@ -32,8 +32,8 @@ module.exports = {
   output: {
 		path: DIST,
 		publicPath: '/vue-wwwid/',
-    filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js'
+    filename: '[name].[hash].js',
+    chunkFilename: '[name].[hash].js'
   },
   module: {
     rules: [

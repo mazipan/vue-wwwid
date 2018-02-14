@@ -104,7 +104,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.vue'],
     alias: {
-      'vue$': 'vue/dist/vue.runtime.esm.js',
+      'vue$': 'vue/dist/vue.esm.js',
       '@': SRC,
 			pages: PAGES,
       components: COMPONENTS,
@@ -166,7 +166,7 @@ module.exports = {
 			{ from: '../node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js.map', to: './' },
 			{ from: './assets', to: './assets' }
     ]),
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    // new webpack.optimize.ModuleConcatenationPlugin(),
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
     // split vendor js into its own file
@@ -189,9 +189,9 @@ module.exports = {
       // will be included into this chunk
       minChunks: Infinity,
     }),
-    new InlineChunkWebpackPlugin({
-      inlineChunks: ['runtime']
-    }),
+    // new InlineChunkWebpackPlugin({
+    //   inlineChunks: ['runtime']
+    // }),
     new ManifestPlugin({
       fileName: 'dep-graph.json'
     }),
@@ -203,29 +203,7 @@ module.exports = {
           beautify: false
         },
         warnings: false,
-        extractComments: true,
-        compress: {
-          unsafe_comps: true,
-          properties: true,
-          keep_fargs: false,
-          pure_getters: true,
-          collapse_vars: true,
-          unsafe: true,
-          warnings: false,
-          sequences: true,
-          dead_code: true,
-          drop_debugger: true,
-          comparisons: true,
-          conditionals: true,
-          evaluate: true,
-          booleans: true,
-          loops: true,
-          unused: true,
-          hoist_funs: true,
-          if_return: true,
-          join_vars: true,
-          drop_console: true
-        }
+        extractComments: true
       },
       parallel: true,
       sourceMap: false

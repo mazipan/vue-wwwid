@@ -8,12 +8,14 @@
 
   <title>Vue-WWWID</title>
 
-
 	<% for (var chunk in htmlWebpackPlugin.files.css) { %>
 		<link rel="preload" href="<%= htmlWebpackPlugin.files.css[chunk] %>"  as="style">
-	<% } %>
-	<% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-		<link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
+  <% } %>
+
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <% if(chunk.indexOf('runtime') == -1){ %>
+      <link rel="preload" href="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>" as="script">
+    <% } %>
 	<% } %>
 
   <meta name="language" content="en-EN"/>

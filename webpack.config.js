@@ -141,7 +141,7 @@ module.exports = {
 		}),
 		new HtmlWebpackPlugin({
       template: './index.ejs',
-      excludeChunks: ['runtime'],
+      // excludeChunks: ['runtime'],
 			minify: {
         collapseBooleanAttributes: true,
         collapseWhitespace: true,
@@ -243,12 +243,10 @@ module.exports = {
     }),
     new CompressionWebpackPlugin({
       asset: '[path].gz[query]',
-      test: new RegExp(
-        '\\.(js|css|html)$'
-      ),
+      test: new RegExp(/\.(js|css|html)$/),
       algorithm: 'gzip',
-      threshold: 10240,
-      minRatio: 0.8,
+      // threshold: 10240,
+      // minRatio: 0.8,
       cache: true
     }),
     // UNCOMMENT FOR BUNDLE ANALYZE

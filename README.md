@@ -15,6 +15,10 @@ https://medium.com/wwwid/tantangan-web-developer-untuk-membuat-aplikasi-web-bisa
 
 https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2Fwwwid
 
+## WebpageTest Easy
+
++ [See result in 26 Feb 2018](https://www.webpagetest.org/result/180226_CX_3bad9e802e569efb3dcb867e0e9cc370/)
+
 ## Lighthouse (latest test: 2018-02-15)
 
 JSON result [here](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/lighthouse-result/2018-02-15/mazipan.github.io-20180215T015206.json)

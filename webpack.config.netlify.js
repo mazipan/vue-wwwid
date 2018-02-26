@@ -161,10 +161,11 @@ module.exports = {
     // copy file to dist
     new CopyWebpackPlugin([
 			{ from: './manifest.json', to: './' },
-			{ from: './assets', to: './assets' },
-			{ from: '../node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js', to: './' },
-			{ from: '../node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js.map', to: './' },
 			{ from: './assets', to: './assets' }
+    ]),
+    new CopyWebpackPlugin([
+			{ from: '../node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js', to: './' },
+			{ from: '../node_modules/workbox-sw/build/importScripts/workbox-sw.prod.v2.1.2.js.map', to: './' }
     ]),
     // new webpack.optimize.ModuleConcatenationPlugin(),
     // keep module.id stable when vender modules does not change

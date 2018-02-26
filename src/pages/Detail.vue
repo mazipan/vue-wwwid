@@ -6,27 +6,9 @@
       Back to home
     </router-link>
 
-    <ul v-if="loading">
-      <li>
-          <div class="a-img">
-            <img v-lazy="'assets/icons/overlay.png'" class="dummy"/>
-          </div>
-          <div class="a-title c">
-            {{ dummy.title }}
-          </div>
-          <div class="c a-wrap">
-            <span class="a-author">
-              {{ dummy.author }}
-            </span>
-            <span class="a-pub">
-              {{ dummy.pubDate }}
-            </span>
-          </div>
-          <div class="a-content c">
-            {{ dummy.desc }}
-          </div>
-      </li>
-    </ul>
+    <LoadingArticle
+      :loading="loading">
+    </LoadingArticle>
 
     <ul v-if="!loading">
       <li>
@@ -46,14 +28,16 @@
 <script>
 const CACHE_ONE = 'article'
 import {getCache} from '@/cache'
-import {ArticleDummy} from '@/data/dummy'
+import LoadingArticle from '@/components/LoadingArticle'
 
 export default {
   name: 'Detail',
+  components: {
+    LoadingArticle
+  },
   data () {
     return {
       loading: true,
-      dummy: ArticleDummy,
       article: {}
     }
   },

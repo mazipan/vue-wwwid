@@ -1,26 +1,9 @@
 <template>
   <div class="content">
-    <ul v-if="loading">
-      <li v-for="i in [1, 2, 3]" :key="i">
-          <div class="a-img">
-            <img v-lazy="'assets/icons/overlay.png'" class="dummy"/>
-          </div>
-          <div class="a-title c">
-            {{ dummy.title }}
-          </div>
-          <div class="c a-wrap">
-            <span class="a-author">
-              {{ dummy.author }}
-            </span>
-            <span class="a-pub">
-              {{ dummy.pubDate }}
-            </span>
-          </div>
-          <div class="a-content c">
-            {{ dummy.desc }}
-          </div>
-      </li>
-    </ul>
+
+    <LoadingArticle
+      :loading="loading">
+    </LoadingArticle>
 
     <ul v-if="!loading">
       <li v-for="article in articles"
@@ -41,6 +24,7 @@
 
       </li>
     </ul>
+
   </div>
 </template>
 
@@ -50,14 +34,16 @@ const CACHE_ALL = 'articles'
 const CACHE_ONE = 'article'
 
 import {getCache, saveCache} from '@/cache'
-import {ArticleDummy} from '@/data/dummy'
+import LoadingArticle from '@/components/LoadingArticle'
 
 export default {
   name: 'Home',
+  components: {
+    LoadingArticle
+  },
   data() {
     return {
       loading: true,
-      dummy: ArticleDummy,
       articles: []
     }
   },

@@ -189,11 +189,11 @@ module.exports = {
       // will be included into this chunk
       minChunks: Infinity,
     }),
-    // new InlineChunkWebpackPlugin({
-    //   inlineChunks: ['runtime']
-    // }),
+    new InlineChunkWebpackPlugin({
+      inlineChunks: ['runtime']
+    }),
     new ManifestPlugin({
-      fileName: 'dep-graph.json'
+      fileName: 'hash.json'
     }),
 		new UglifyJSPlugin({
       test: /\.js($|\?)/i,

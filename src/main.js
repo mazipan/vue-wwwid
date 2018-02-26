@@ -6,7 +6,7 @@ import router from './router'
 import App from './App.vue'
 
 if (process.env.NODE_ENV === "production") {
-  require("./pwa");
+
 } else {
   Vue.config.devtools = true
 }

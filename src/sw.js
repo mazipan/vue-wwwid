@@ -1,4 +1,4 @@
-importScripts('/vue-wwwid/workbox-sw.prod.v2.1.2.js');
+importScripts('workbox-sw.prod.v2.1.2.js');
 
 const workbox = new WorkboxSW({
   skipWaiting: true,

@@ -1,0 +1,50 @@
+.content{
+  margin: 70px 0;
+}
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+li{
+  border: 0;
+  border-bottom: 1px solid #e2d6d6;
+  padding: 1em .3em;
+}
+.c::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.a-img img{
+  width: 100%;
+  height: auto;
+}
+.a-img img[lazy=loading]{
+  max-height: 200px;
+}
+.a-img .dummy{
+  max-height: 200px;
+}
+.a-title{
+  margin: .5em 0 1em;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.a-wrap{
+  margin-bottom: 1em;
+}
+.a-author, .a-pub{
+  color: #ccc;
+  font-size: .9rem;
+}
+.a-author{
+  float: left;
+}
+.a-pub{
+  float: right;
+}
+.a-content{
+  font-size: 1rem;
+  color: #6d6565;
+}

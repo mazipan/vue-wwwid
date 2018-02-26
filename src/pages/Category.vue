@@ -6,40 +6,45 @@
       Back to home
     </router-link>
 
-    <ArticleDetail
-      :article="article"
-      :isFullContent="true">
-    </ArticleDetail>
+    <h5>Articles in category <span class="a-cat">{{ articleShown }}</span></h5>
+
+    <Articles
+      :articles="articles">
+    </Articles>
+
 
   </div>
 </template>
 
 <script>
 import {getCache} from '@/cache'
-import ArticleDetail from '@/components/ArticleDetail'
+import Articles from '@/components/Articles'
 
 const CACHE_ALL = 'articles'
 
 export default {
-  name: 'Detail',
+  name: 'Category',
   components: {
-    ArticleDetail
+    Articles
   },
   data () {
     return {
     }
   },
   computed: {
-    article: function () {
-      return this.getDetailData(this.$route.params.slug)
+    articles: function () {
+      return this.getListOfArticle(this.$route.params.category)
+    },
+    articleShown: function () {
+      return this.$route.params.category
     }
   },
   methods: {
-    getDetailData (slug) {
+    getListOfArticle(category) {
       let data = getCache(CACHE_ALL)
       return data.filter(item => {
-        return item.slug.indexOf(slug) >= 0
-      })[0]
+        return item.categories.includes(category)
+      })
     }
   }
 }
@@ -48,17 +53,6 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/global.scss";
-figure{
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-figcaption{
-  font-style: italic;
-  text-align: center;
-  color: #ccc;
-}
 .back-link{
   margin-left: -10px;
   text-decoration: none;

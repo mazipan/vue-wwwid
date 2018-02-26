@@ -5,25 +5,10 @@
       :loading="loading">
     </LoadingArticle>
 
-    <ul v-if="!loading">
-      <li v-for="article in articles"
-          :key="article.guid" @click="seeDetail(article.slug)">
-
-          <div class="a-img">
-            <img v-lazy="article.thumbnail" :alt="article.title" />
-          </div>
-
-          <div class="a-title c">{{ article.title }}</div>
-
-          <div class="c a-wrap">
-            <span class="a-author">{{ article.author }}</span>
-            <span class="a-pub">{{ article.pubDate }}</span>
-          </div>
-
-          <div class="a-content c" v-html="article.contentView"></div>
-
-      </li>
-    </ul>
+    <Articles
+      :articles="articles"
+      v-if="!loading">
+    </Articles>
 
   </div>
 </template>
@@ -35,11 +20,13 @@ const CACHE_ONE = 'article'
 
 import {getCache, saveCache} from '@/cache'
 import LoadingArticle from '@/components/LoadingArticle'
+import Articles from '@/components/Articles'
 
 export default {
   name: 'Home',
   components: {
-    LoadingArticle
+    LoadingArticle,
+    Articles
   },
   data() {
     return {
@@ -73,16 +60,6 @@ export default {
           this.loading = false
         })
       }
-    },
-    seeDetail(slug) {
-      let data = this.articles.filter(item => {
-        return item.slug === slug
-      })
-      console.log('detail', data)
-      if (data.length > 0) {
-        saveCache(CACHE_ONE, data[0])
-        this.$router.push(`/post/${data[0].slug}`)
-      }
     }
   }
 }
@@ -90,5 +67,4 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/global.scss";
-
 </style>

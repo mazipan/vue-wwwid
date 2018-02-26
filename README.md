@@ -8,11 +8,15 @@
 
 ![Vue-WWWID Homepage](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/screenshoot-aboutpage.png)
 
-## Challenge
+## Medium Article
+
+https://medium.com/vuejs-id/mempercepat-load-time-wwwid-rss-reader-menggunakan-framework-vue-js-wwwidchallenge-95a937ec9910
+
+## Challenge Information
 
 https://medium.com/wwwid/tantangan-web-developer-untuk-membuat-aplikasi-web-bisa-digunakan-kurang-dari-5-detik-70bb7431741d
 
-## API
+## API End Point
 
 https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2Fwwwid
 

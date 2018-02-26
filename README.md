@@ -3,7 +3,8 @@
 
 ## Live
 
-https://mazipan.github.io/vue-wwwid/
++ GH-Pages: https://mazipan.github.io/vue-wwwid/
++ Netlify: https://vue-wwwid.netlify.com/#/
 
 ![Vue-WWWID Homepage](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/screenshoot-aboutpage.png)
 

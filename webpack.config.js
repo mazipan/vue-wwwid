@@ -198,6 +198,9 @@ module.exports = {
 		new UglifyJSPlugin({
       test: /\.js($|\?)/i,
 			uglifyOptions: {
+        compress: {
+          drop_console: true
+        },
         output: {
           comments: false,
           beautify: false

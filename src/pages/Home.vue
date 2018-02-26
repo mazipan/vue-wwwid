@@ -10,7 +10,7 @@
           :key="article.guid" @click="seeDetail(article.slug)">
 
           <div class="a-img">
-            <img v-lazy="article.thumbnail" />
+            <img v-lazy="article.thumbnail" :alt="article.title" />
           </div>
 
           <div class="a-title c">{{ article.title }}</div>

@@ -12,7 +12,8 @@
     "build-gh": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build-netlify": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.netlify.js",
     "dist": "npm run build",
-    "publish": "node ./gh-publish.js && node ./gh-publish-netlify.js"
+    "publish": "node ./gh-publish.js && node ./gh-publish-netlify.js",
+    "publish-firebase": "firebase deploy --only hosting"
   },
   "repository": {
     "type": "git",

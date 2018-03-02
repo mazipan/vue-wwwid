@@ -1,0 +1,36 @@
+{
+  "hosting": {
+    "public": "build-netlify",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/build/**",
+      "**/src/**",
+      "**/pwa-development/**",
+      "**/lighthouse-result/**",
+      "**/webpagetest/**",
+      ".babelrc",
+      "gh-publish.js-netlify",
+      "gh-publish.js",
+      "LICENSE",
+      "package.json",
+      "prebuild.js",
+      "README.md",
+      "screenshoot-aboutpage.png",
+      "screenshoot-homepage.png",
+      "webpack.config.js",
+      "webpack.config.netlify.js",
+      "yarn.lock"
+    ],
+    "headers": [
+      {
+        "source" : "**/*.@(js|css|jpg|jpeg|gif|png|ico)",
+        "headers" : [ {
+          "key" : "Cache-Control",
+          "value" : "max-age=7200"
+        }]
+      }
+    ]
+  }
+}

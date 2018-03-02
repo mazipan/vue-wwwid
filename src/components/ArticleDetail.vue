@@ -1,9 +1,5 @@
 <template>
   <div class="a" v-if="article">
-      <div class="a-img" v-if="!isFullContent">
-        <img v-lazy="article.thumbnail" :alt="article.title" />
-      </div>
-
       <router-link class="c a-title" :to="'/post/' + article.slug">
         {{ article.title }}
       </router-link>
@@ -13,7 +9,12 @@
         <span class="a-pub">{{ article.pubDate }}</span>
       </div>
 
-      <div class="c a-content" v-html="content"></div>
+      <div class="c a-flex">
+        <div class="a-img" v-if="!isFullContent">
+          <img v-lazy="article.thumbnail" :alt="article.title" />
+        </div>
+        <div class="a-content" v-html="content"></div>
+      </div>
 
       <div class="c a-cats">
         <router-link class="a-cat"

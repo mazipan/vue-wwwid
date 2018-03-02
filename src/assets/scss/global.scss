@@ -17,8 +17,9 @@ li{
   display: table;
 }
 .a-img img{
-  width: 100%;
+  width: 120px;
   height: auto;
+  margin-right: 1em;
 }
 .a-img img[lazy=loading]{
   max-height: 200px;
@@ -35,6 +36,12 @@ li{
 .a-wrap{
   margin-bottom: 1em;
 }
+.a-flex{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin-bottom: 1em;
+}
 .a-author, .a-pub{
   color: #ccc;
   font-size: .9rem;
@@ -48,6 +55,7 @@ li{
 .a-content{
   font-size: 1rem;
   color: #6d6565;
+  width: 100%;
 }
 .a-cat{
   color: #4dba87;

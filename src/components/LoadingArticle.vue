@@ -1,9 +1,6 @@
 <template>
   <ul v-if="loading" class="l">
-    <li v-for="i in [1]" :key="i">
-        <div class="a-img">
-          <img v-lazy="'assets/icons/overlay.png'" class="dummy"/>
-        </div>
+    <li v-for="i in [1, 2]" :key="i">
         <div class="d-title"></div>
         <div class="d-title"></div>
         <div class="d-wrap">
@@ -14,12 +11,17 @@
           <div class="d-pub">
           </div>
         </div>
-        <div class="c">
-          <div class="d-text"></div>
-          <div class="d-text"></div>
-          <div class="d-text"></div>
-          <div class="d-text"></div>
-          <div class="d-text"></div>
+        <div class="c a-flex">
+          <div class="a-img">
+            <img v-lazy="'assets/icons/overlay.png'" class="dummy"/>
+          </div>
+          <div class="a-content">
+            <div class="d-text"></div>
+            <div class="d-text"></div>
+            <div class="d-text"></div>
+            <div class="d-text"></div>
+            <div class="d-text"></div>
+          </div>
         </div>
     </li>
   </ul>

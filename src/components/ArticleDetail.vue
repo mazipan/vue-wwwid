@@ -11,7 +11,7 @@
 
       <div class="c a-flex">
         <div class="a-img" v-if="!isFullContent">
-          <img v-lazy="article.thumbnail" :alt="article.title" />
+          <img v-lazy="article.compressedImg" :alt="article.title" />
         </div>
         <div class="a-content" v-html="content"></div>
       </div>

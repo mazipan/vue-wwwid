@@ -66,3 +66,12 @@ li{
   margin: 0 5px 10px 0;
   font-size: .9rem;
 }
+
+pre {
+  padding: .5em;
+  background-color: #f6f8fa;
+  overflow: auto;
+  border-radius: 0.25em;
+  max-width: 100%;
+  color: #ccc;
+}

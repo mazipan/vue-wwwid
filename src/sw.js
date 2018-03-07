@@ -32,9 +32,9 @@ workbox.router.registerRoute(
 );
 
 workbox.router.registerRoute(
-  new RegExp('^https:\/\/res.cloudinary.com\/.*'),
+  new RegExp('^https:\/\/res\.cloudinary\.com.*'),
   workbox.strategies.cacheFirst({
-    cacheName: 'wwwid-img',
+    cacheName: 'wwwid-compressed-img',
     cacheableResponse: {
       statuses: [0, 200], // Make sure 0 is included in this list.
     }

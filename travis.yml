@@ -2,8 +2,10 @@ language: node_js
 node_js: '7'
 branches:
    only:
-      - netlify-pages
+      - master
 before_script:
    - npm install -g firebase-tools
 script:
+  - npm run build-netlify
+after_success:
   - firebase deploy --token $FIREBASE_TOKEN

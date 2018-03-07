@@ -5,6 +5,7 @@
 
 + GH-Pages: https://mazipan.github.io/vue-wwwid/
 + Netlify: https://vue-wwwid.netlify.com/#/
++ Firebase : https://vuejs-id.firebaseapp.com/#/
 
 ![Vue-WWWID Homepage](https://raw.githubusercontent.com/mazipan/vue-wwwid/master/screenshoot-aboutpage.png)
 

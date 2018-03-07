@@ -162,7 +162,7 @@ module.exports = {
     new CopyWebpackPlugin([
 			{ from: '../.travis.yml', to: './' },
 			{ from: '../package.json', to: './' },
-			{ from: './manifest.json', to: './' },
+			{ from: './manifest.netlify.json', to: './manifest.json' },
 			{ from: './libs/workbox-sw.prod.v2.1.2.js', to: './' },
 			{ from: './libs/workbox-sw.prod.v2.1.2.js.map', to: './' },
 			{ from: './assets', to: './assets' }

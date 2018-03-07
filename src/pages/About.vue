@@ -15,7 +15,7 @@
     <h5>
       See Source Code : <br>
       <a href="https://github.com/mazipan/vue-wwwid"
-          target="_blank" rel="noopener">
+          target="_blank" rel="noopener" alt="Github Repository">
         https://github.com/mazipan/vue-wwwid
       </a>
     </h5>

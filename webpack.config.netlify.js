@@ -160,7 +160,7 @@ module.exports = {
 	]).concat(ENV === 'production' ? [
     // copy file to dist
     new CopyWebpackPlugin([
-			{ from: '../travis.yml', to: './' },
+			{ from: '../.travis.yml', to: './' },
 			{ from: '../package.json', to: './' },
 			{ from: './manifest.json', to: './' },
 			{ from: './assets', to: './assets' }

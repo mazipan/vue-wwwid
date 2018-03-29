@@ -1,5 +1,5 @@
 # vue-wwwid
-️️️⚡️ PWA with Vue + Workbox for WWWID RSS Feed
+🐢️️️ PWA with Vue + Workbox for WWWID RSS Feed
 
 ## Live
 

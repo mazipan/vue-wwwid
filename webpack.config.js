@@ -162,6 +162,7 @@ module.exports = {
     new CopyWebpackPlugin([
 			{ from: '../.travis.yml', to: './' },
 			{ from: '../package.json', to: './' },
+			{ from: '../README.md', to: './' },
 			{ from: './manifest.json', to: './' },
 			{ from: './assets', to: './assets' }
     ]),

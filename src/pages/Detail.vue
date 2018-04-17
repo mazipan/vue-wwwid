@@ -40,18 +40,3 @@ export default {
 }
 
 </script>
-
-<style lang="scss">
-@import "../assets/scss/global.scss";
-figure{
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-figcaption{
-  font-style: italic;
-  text-align: center;
-  color: #ccc;
-}
-</style>

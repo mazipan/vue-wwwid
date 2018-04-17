@@ -13,7 +13,7 @@
         </div>
         <div class="c a-flex">
           <div class="a-img">
-            <img v-lazy="'assets/icons/overlay.png'" class="dummy"/>
+            <img src="'assets/icons/overlay.png'" class="dummy"/>
           </div>
           <div class="a-content">
             <div class="d-text"></div>
@@ -35,7 +35,3 @@ export default {
   ]
 }
 </script>
-
-<style lang="scss">
-@import "../assets/scss/loading.scss";
-</style>

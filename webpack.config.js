@@ -11,7 +11,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const InlineChunkWebpackPlugin = require('html-webpack-inline-chunk-plugin');
 
-const workboxPlugin = require('workbox-webpack-plugin');
+const {InjectManifest} = require('workbox-webpack-plugin')
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -163,8 +163,6 @@ module.exports = {
 			{ from: '../.travis.yml', to: './' },
 			{ from: '../package.json', to: './' },
 			{ from: './manifest.json', to: './' },
-			{ from: './libs/workbox-sw.prod.v2.1.2.js', to: './' },
-			{ from: './libs/workbox-sw.prod.v2.1.2.js.map', to: './' },
 			{ from: './assets', to: './assets' }
     ]),
     // new webpack.optimize.ModuleConcatenationPlugin(),
@@ -212,9 +210,7 @@ module.exports = {
       parallel: true,
       sourceMap: false
     }),
-    new workboxPlugin({
-      globDirectory: DIST,
-      globPatterns: ['**/*.{html,js,css,json,gif,png}'],
+    new InjectManifest({
       swDest: path.join(DIST, 'sw.js'),
       swSrc: path.join(SRC, 'sw.js')
     }),

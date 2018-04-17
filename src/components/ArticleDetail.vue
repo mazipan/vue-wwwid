@@ -11,7 +11,11 @@
 
       <div class="c a-flex">
         <div class="a-img" v-if="!isFullContent">
-          <img v-lazy="article.compressedImg" :alt="article.title" />
+          <img v-lazyload
+              :src="'assets/icons/overlay.png'"
+              :data-src="article.compressedImg"
+              data-err=""
+              :alt="article.title"/>
         </div>
         <div class="a-content" v-html="content"></div>
       </div>

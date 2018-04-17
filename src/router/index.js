@@ -5,7 +5,6 @@ import Router from 'vue-router'
 const Home = () => import(/* webpackChunkName: "home" */ 'pages/Home.vue')
 const Detail = () => import(/* webpackChunkName: "detail" */ 'pages/Detail.vue')
 const Category = () => import(/* webpackChunkName: "category" */ 'pages/Category.vue')
-const About = () => import(/* webpackChunkName: "about" */ 'pages/About.vue')
 
 Vue.use(Router)
 
@@ -25,13 +24,10 @@ var router = new Router({
       path: '/category/:category',
       name: 'Category',
       component: Category
-    },
-    {
-      path: '/about',
-      name: 'About',
-      component: About
     }
   ]
 })
-
+router.afterEach((to, from) => {
+  window.scrollTo(0, 0)
+})
 export default router

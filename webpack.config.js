@@ -158,14 +158,6 @@ module.exports = {
       }
     })
 	]).concat(ENV === 'production' ? [
-    // copy file to dist
-    new CopyWebpackPlugin([
-			{ from: '../.travis.yml', to: './' },
-			{ from: '../package.json', to: './' },
-			{ from: '../README.md', to: './' },
-			{ from: './manifest.json', to: './' },
-			{ from: './assets', to: './assets' }
-    ]),
     // new webpack.optimize.ModuleConcatenationPlugin(),
     // keep module.id stable when vender modules does not change
     new webpack.HashedModuleIdsPlugin(),
@@ -228,6 +220,14 @@ module.exports = {
       swDest: path.join(DIST, 'service-worker.js'),
       swSrc: path.join(SRC, 'sw.js')
     }),
+    // copy file to dist
+    new CopyWebpackPlugin([
+			{ from: '../.travis.yml', to: './' },
+			{ from: '../package.json', to: './' },
+			{ from: '../README.md', to: './' },
+			{ from: './manifest.json', to: './' },
+			{ from: './assets', to: './assets' }
+    ])
     // UNCOMMENT FOR BUNDLE ANALYZE
     // new BundleAnalyzerPlugin()
   ] : []),

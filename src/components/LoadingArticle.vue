@@ -13,7 +13,7 @@
         </div>
         <div class="c a-flex">
           <div class="a-img">
-            <img src="'assets/icons/overlay.png'" class="dummy"/>
+            <img src="assets/icons/overlay.png" class="dummy"/>
           </div>
           <div class="a-content">
             <div class="d-text"></div>

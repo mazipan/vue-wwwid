@@ -210,10 +210,6 @@ module.exports = {
       parallel: true,
       sourceMap: false
     }),
-    new InjectManifest({
-      swDest: path.join(DIST, 'sw.js'),
-      swSrc: path.join(SRC, 'sw.js')
-    }),
     new OptimizeCSSPlugin({
       cssProcessorOptions: {
         safe: true
@@ -226,6 +222,10 @@ module.exports = {
       // threshold: 10240,
       // minRatio: 0.8,
       cache: true
+    }),
+    new InjectManifest({
+      swDest: path.join(DIST, 'sw.js'),
+      swSrc: path.join(SRC, 'sw.js')
     }),
     // UNCOMMENT FOR BUNDLE ANALYZE
     // new BundleAnalyzerPlugin()

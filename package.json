@@ -7,12 +7,12 @@
   "private": false,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress --color --open",
-    "prebuild": "rm -rf ./build && rm -rf ./build-netlify",
+    "prebuild": "rm -rf ./build-github && rm -rf ./build-netlify",
     "build": "npm run build-gh && npm run build-netlify",
     "build-gh": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build-netlify": "cross-env NODE_ENV=production webpack --progress --hide-modules --config webpack.config.netlify.js",
     "dist": "npm run build",
-    "publish": "node ./gh-publish.js && node ./gh-publish-netlify.js",
+    "publish": "rm -rf node_modules/gh-pages/.cache && node ./gh-publish.js",
     "publish-firebase": "firebase deploy --only hosting"
   },
   "repository": {

@@ -225,7 +225,7 @@ module.exports = {
       cache: true
     }),
     new InjectManifest({
-      swDest: path.join(DIST, 'sw.js'),
+      swDest: path.join(DIST, 'service-worker.js'),
       swSrc: path.join(SRC, 'sw.js')
     }),
     // UNCOMMENT FOR BUNDLE ANALYZE

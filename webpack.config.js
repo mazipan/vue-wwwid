@@ -15,7 +15,7 @@ const {InjectManifest} = require('workbox-webpack-plugin')
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const DIST = path.resolve(__dirname, "build");
+const DIST = path.resolve(__dirname, "build-github");
 const SRC = path.resolve(__dirname, "src");
 const ASSETS = path.resolve(__dirname, "src/assets");
 const PAGES = path.resolve(__dirname, "src/pages");
@@ -225,7 +225,7 @@ module.exports = {
       cache: true
     }),
     new InjectManifest({
-      swDest: path.join(DIST, 'sw.js'),
+      swDest: path.join(DIST, 'service-worker.js'),
       swSrc: path.join(SRC, 'sw.js')
     }),
     // UNCOMMENT FOR BUNDLE ANALYZE

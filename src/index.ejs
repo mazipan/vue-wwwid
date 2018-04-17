@@ -262,7 +262,7 @@
   </footer>
 
   <!-- INLINE PWA FILE -->
-  <script>'serviceWorker' in navigator && window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').then(a => { console.log('SW registered: ', a) }).catch(a => { console.log('SW registration failed: ', a) }) });</script>
+  <script>'serviceWorker' in navigator && window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js').then(a => { console.log('SW registered: ', a) }).catch(a => { console.log('SW registration failed: ', a) }) });</script>
 </body>
 
 </html>

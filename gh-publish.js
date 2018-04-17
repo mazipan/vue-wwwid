@@ -1,5 +1,5 @@
 const ghpages = require('gh-pages');
-const BRANCH = 'demo-pages';
+const BRANCH = 'gh-pages';
 const TODAY = new Date().toLocaleString();
 
 console.log(`start publishing to ${BRANCH}`);

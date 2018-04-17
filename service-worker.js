@@ -1,4 +1,4 @@
-importScripts("/vue-wwwid/precache-manifest.679d9fe3ad5e523cb07e1995eab1c941.js", "https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js");
+importScripts("/vue-wwwid/precache-manifest.f067f79c0d28e964f30c2dceaa43e403.js", "https://storage.googleapis.com/workbox-cdn/releases/3.1.0/workbox-sw.js");
 
 self.__precacheManifest = [].concat(self.__precacheManifest || [])
 workbox.precaching.suppressWarnings()
